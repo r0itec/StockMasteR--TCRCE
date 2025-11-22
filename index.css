@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Utility fallbacks for "brand" color so you can keep using .btn-primary etc
+   Recommended: add these colors to tailwind.config.js `theme.extend.colors` for best results.
+*/
+@layer utilities {
+  .bg-brand-500 { background-color: #3b82f6; }
+  .bg-brand-700 { background-color: #2563eb; }
+  .text-brand-100 { color: #e0f2fe; }
+}
+
+@layer components {
+  /* header link: use @apply for base utilities and plain CSS for hover/alpha */
+  .header-link {
+    @apply text-slate-100 px-3 py-2 rounded-md;
+  }
+  .header-link:hover {
+    background-color: rgb(255 255 255 / 0.3); /* 30% white */
+  }
+
+  /* primary button: apply base utilities, set brand background in CSS */
+  .btn-primary {
+    @apply text-slate-900 font-semibold px-4 py-2 rounded-lg shadow-md;
+    background-color: #3b82f6; /* bg-brand-500 fallback */
+  }
+  .btn-primary:hover {
+    background-color: #2563eb; /* bg-brand-700 fallback */
+  }
+
+  /* ghost button: avoid arbitrary slash in @apply; use plain CSS for hover alpha */
+  .btn-ghost {
+    @apply border border-slate-600 text-slate-100 px-3 py-2 rounded-lg;
+  }
+  .btn-ghost:hover {
+    background-color: rgb(255 255 255 / 0.05); /* 5% white */
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold;
+    /* use text-brand-100 utility defined above */
+    color: var(--badge-text, #e0f2fe);
+    background-color: rgb(255 255 255 / 0.05);
+  }
+
+  .table {
+    @apply min-w-full divide-y divide-slate-700 text-sm;
+  }
+  .table th {
+    @apply text-slate-300 text-left px-4 py-3;
+  }
+  .table td {
+    @apply px-4 py-3;
+  }
+}
+
+/* root variables and base layout */
+:root {
+  --accent: #1ea7ff;
+  --muted: #9aa4b2;
+}
+
+html, body, #root { height: 100%; }
+
+body {
+  @apply bg-gradient-to-b from-[#07101a] to-[#0b1220] text-slate-100 font-inter;
+}
+
+.card-glass {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 12px 30px rgba(2,6,23,0.6);
+  border-radius: 12px;
+}
